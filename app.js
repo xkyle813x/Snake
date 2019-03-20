@@ -51,7 +51,7 @@ app.get('/snake',function(req,res){
 	res.type('.html');
     res.render('game');
     res.send('okay');
-)};
+});
 
 app.post('/auth', jsonParser, function(req, res) {
     const authInfo = req.body;
