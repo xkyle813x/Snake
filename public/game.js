@@ -51,15 +51,19 @@ function game() {
 function move(evt) {
     switch(evt.key) {
         case 'ArrowUp':
+        	evt.preventDefault();
             x_velocity=0;y_velocity=-1;
             break;
         case 'ArrowLeft':
+        	evt.preventDefault();
             x_velocity=-1;y_velocity=0;
             break;
         case 'ArrowDown':
+        	evt.preventDefault();
             x_velocity=0;y_velocity=1;
             break;
         case 'ArrowRight':
+        	evt.preventDefault();
             x_velocity=1;y_velocity=0;
             break;
     }
