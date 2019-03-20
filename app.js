@@ -1,3 +1,5 @@
+const cookieSession = require('cookie-session');
+const sha256 = require('sha-256-js');
 const sqlite3 = require('sqlite3').verbose();
 const db = new sqlite3.Database( __dirname + '/users.db',
     function(err) {
@@ -35,14 +37,49 @@ app.set('views', __dirname + '/views');
 
 const port = process.env.PORT || 8000;
 
+app.use(cookieSession({
+	  name: 'session',
+	  secret: 'foo'
+	}));
+
 app.get('/', function(req,res){
     res.type('.html');
     res.render('game');
 });
 
-app.get('/snakeGame', function(req,res){
-    res.type('.html');
+app.get('/snake',function(req,res){
+	res.type('.html');
     res.render('game');
+    res.send('okay');
+)};
+
+app.post('/auth', jsonParser, function(req, res) {
+    const authInfo = req.body;
+    db.get('SELECT * FROM users where user = ?',
+        [ authInfo.user ],
+        function(err, row) {
+            if ( !err ) {
+                if( row ) {
+                    if( sha256(authInfo.password) == row.sha256_pw ) {
+                        req.session.auth = true;
+                        req.session.user = authInfo.user;
+                        res.send( { ok: true } );
+                    }
+                    else {
+                        req.session.auth = false;
+                        res.send( { ok: false } );
+                    }
+                }
+                else {
+                    req.session.auth = false;
+                    res.send( { ok: false, msg : 'nouser' } );
+                }
+            }
+            else {
+                req.session.auth = false;
+                res.send( err );
+            }
+        } );
 });
 
 app.post('/score/update',jsonParser, function(req, res){
