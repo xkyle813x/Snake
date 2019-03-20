@@ -39,12 +39,18 @@
 	text-align: center;
 }
 
+#snakeButton{
+	border: 10px solid black;
+	flex-grow: 2;
+	text-align: center;
+}
+
 .bar:hover{
 	background: black;
 	color: white;
 }
 
-#game{
+#mainSpace{
 	border: 10px solid black;
 	flex-grow: 1;
 }
