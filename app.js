@@ -40,17 +40,19 @@ const port = process.env.PORT || 8000;
 app.use(cookieSession({
 	  name: 'session',
 	  secret: 'foo'
-	}));
+}));
+    
+function generate_snake(res){
+     res.type('.html');
+     res.render('game');
+}
 
 app.get('/', function(req,res){
-    res.type('.html');
-    res.render('game');
+    generate_snake(res)
 });
 
 app.get('/snake',function(req,res){
-	res.type('.html');
-    res.render('game');
-    res.send('okay');
+	generate_snake(res)
 });
 
 app.post('/auth', jsonParser, function(req, res) {
