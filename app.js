@@ -156,6 +156,9 @@ app.post('/auth', jsonParser, function(req, res) {
                     if( sha256(authInfo.password) == row.sha256_pw ) {
                         req.session.auth = true;
                         req.session.user = authInfo.user;
+                        if(row.admin == 1){
+                            req.session.admin = true;
+                        }
                         res.send( { ok: true } );
                     }
                     else {
@@ -173,20 +176,6 @@ app.post('/auth', jsonParser, function(req, res) {
                 res.send( err );
             }
         } );
-});
-
-app.post('/score/update',jsonParser, function(req, res){
-	const user = req.body;
-    console.log( user);
-	db.run('UPDATE users SET highscore=? WHERE id=?', 
-	[user.highscore, user.id], function(err) {
-		if(!err){
-			res.send({id : user.id, status: 'updated'});
-		}
-		else{
-			res.send({id: user.id, error: err});
-		}
-	});
 });
 
 
