@@ -9,6 +9,9 @@
 
 	<div id="sidebar"> 
 		<div id="loginbar"> 
+			{{#if session.auth}}
+			<p id = "LogMessage">WORKS</p>
+			{{else}}
 			<label for="username"> Username: </label>
 			<input id="username" name="username" type="text" size="12">
 			 
@@ -17,8 +20,7 @@
 			
 			<button id="login"> Log In </button>
 			<button id="signUp"> Sign Up</button>
-
-			<p id = "LogMessage"></p>
+			{{/if}}
 		</div>
 		<a href="/leaderboards" id="leaderboard" class="bar"> Leaderboards </a>
 		<div id="admin" class="bar"> Admin Page </div>

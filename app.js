@@ -38,8 +38,7 @@ app.set('views', __dirname + '/views');
 const port = process.env.PORT || 8000;
 
 app.use(cookieSession({
-	  name: 'session',
-	  secret: 'foo'
+    keys: ['secret']
 }));
     
 function generate_snake(res){
