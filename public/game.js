@@ -1,9 +1,30 @@
+function checkHighScore(score, callback){
+    let req = new XMLHttpRequest();
+    req.open('POST', '/checkscore');
+    req.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
+	req.responseType = 'json';
+	req.onload = function(evt) { callback( req ); };
+	let obj = { score: score };
+	req.send( JSON.stringify( obj ));
+}
+
+function updateHighScore(score, callback){
+    let req = new XMLHttpRequest();
+    req.open('POST', '/updatescore');
+    req.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
+    req.responseType = 'json';
+    req.onload = function(evt) { callback( req ); };
+    let obj = { score:score };
+	req.send( JSON.stringify( obj ));
+}
+
 window.onload=function() {
     canv=document.getElementById("gameCanvas");
     ctx=canv.getContext("2d");
     document.addEventListener("keydown",move);
     setInterval(game,1000/12);
 }
+score = 0
 snake_x=snake_y=10;
 gridSize=tiles=20;
 pill_x=pill_y=15;
@@ -31,8 +52,27 @@ function game() {
     ctx.fillStyle="white";
     for(var i=0;i<trail.length;i++) {
         ctx.fillRect(trail[i].x*gridSize,trail[i].y*gridSize,gridSize-2,gridSize-2);
-        if(trail[i].x==snake_x && trail[i].y==snake_y) {
+        if((trail[i].x==snake_x && trail[i].y==snake_y) && (trail[i].x != 10 && trail[i].y != 10)) {
             tail = 1;
+            checkHighScore(score,  (req) => {
+                let res = req.response;
+                if(res.ok){
+                    console.log('New High Score');
+                    updateHighScore(score,  (req) => {
+                        let res2 = req.response;
+                        if(res2.ok){
+                            console.log("High Score Registered");
+                        }
+                        else{
+                            console.log('High Score Error', res2);
+                        }
+                    });
+                }
+                else{
+                    console.log('No New High Score');
+                }
+            });
+            score = 0;
         }
     }
     trail.push({x:snake_x,y:snake_y});
@@ -42,6 +82,7 @@ function game() {
  
     if(pill_x==snake_x && pill_y==snake_y) {
         tail++;
+        score++;
         pill_x=Math.floor(Math.random()*tiles);
         pill_y=Math.floor(Math.random()*tiles);
     }

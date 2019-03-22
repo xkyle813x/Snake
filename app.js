@@ -47,6 +47,15 @@ function generate_snake(res){
      res.render('game');
 }
 
+function generate_leaderboard(res){
+    //first have sql statement to grab first ten high scores from databases
+    //then call res.render on leaderboard.hbs, sending the rows back
+}
+function generate_admin(res){
+    //first have sql statement to grab all users
+    //then call res.render on admin.bs, sending the rows back
+}
+
 app.get('/', function(req,res){
     generate_snake(res)
 });
@@ -55,9 +64,91 @@ app.get('/snake',function(req,res){
 	generate_snake(res)
 });
 
+app.get('/leaderboard',function(req,res){
+	generate_leaderboard(res)
+});
+
+app.get('/admin',function(req,res){
+	generate_admin(res)
+});
+
+
+app.post('/checkscore', jsonParser, function(req,res){
+    const scoreInfo = req.body;
+    console.log( scoreInfo);
+    console.log(req.session.user);
+    db.get('SELECT highscore FROM users where username = ?',
+    [req.session.user],
+    function(err,row){
+        console.log( row);
+        if(!err){
+            if(row.highscore < scoreInfo.score){
+                res.send( { ok: true } );
+            }
+            else{
+                res.send({ok : false});
+            }
+        }
+        else{
+            res.send( { ok: false } );
+        }
+    });
+});
+
+app.post('/updatescore',jsonParser, function(req, res){
+	const scoreInfo = req.body;
+    console.log( scoreInfo);
+	db.run('UPDATE users SET highscore=? WHERE username=?', 
+	[scoreInfo.score, req.session.user], function(err) {
+		if(!err){
+			res.send({ok : true});
+		}
+		else{
+			res.send({ok: false});
+		}
+	});
+});
+
+app.post('/check', jsonParser, function(req,res){
+    const authInfo = req.body;
+    db.get('SELECT * FROM users where username = ?',
+    [authInfo.user],
+    function(err,row){
+        if(!err){
+            if(row){
+                res.send( { ok: false } );
+            }
+            else{
+                res.send({ok : true});
+            }
+        }
+        else{
+            res.send( { ok: false } );
+        }
+    });
+});
+
+app.post('/newuser', jsonParser, function(req, res) {
+    const authInfo = req.body;
+    db.run('INSERT INTO users(username, sha256_pw, highscore, admin) VALUES(?,?,?,?)',
+    [authInfo.user, sha256(authInfo.password), 0, 0], 
+    function(err){
+        if(!err){
+            req.session.auth = true;
+            req.session.user = authInfo.user;
+            res.send( { ok: true } );
+        }
+        else{
+            req.session.auth = false;
+            res.send( { ok: false } );
+        }
+
+    });
+});
+
 app.post('/auth', jsonParser, function(req, res) {
     const authInfo = req.body;
-    db.get('SELECT * FROM users where user = ?',
+    db.get('SELECT * FROM users where username = ?',
         [ authInfo.user ],
         function(err, row) {
             if ( !err ) {
@@ -99,8 +190,6 @@ app.post('/score/update',jsonParser, function(req, res){
 });
 
 
-function generateLeaderboardPage(res){
-	
-}
+
 
 app.listen(port, () => console.log(`Listening on port ${port}!`));

@@ -18,6 +18,9 @@
 	width: 25%;
 	height: 100%;
 }
+p{
+	color: white;
+}
 
 #loginbar{
 	background: black;
