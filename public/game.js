@@ -8,6 +8,8 @@ function checkHighScore(score, callback){
 	req.send( JSON.stringify( obj ));
 }
 
+
+
 function updateHighScore(score, callback){
     let req = new XMLHttpRequest();
     req.open('POST', '/updatescore');

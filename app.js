@@ -171,7 +171,7 @@ app.post('/auth', jsonParser, function(req, res) {
                         if(row.admin == 1){
                             req.session.admin = true;
                         }
-                        res.send( { ok: true } );
+                        res.send( { ok: true, score : row.highscore } );
                     }
                     else {
                         req.session.auth = false;

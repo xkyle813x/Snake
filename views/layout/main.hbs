@@ -1,36 +1,51 @@
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="UTF-8">
-<link href="style.css" rel="stylesheet">
-</head>
-<body>
-<div id="app">
 
-	<div id="sidebar"> 
-		<div id="loginbar"> 
-			{{#if session.auth}}
-			<p id = "LogMessage">WORKS</p>
-			{{else}}
-			<label for="username"> Username: </label>
-			<input id="username" name="username" type="text" size="12">
-			 
-			<label for="password"> Password: </label>
-			<input id="password" name="password" type="text" size="12">
-			
-			<button id="login"> Log In </button>
-			<button id="signUp"> Sign Up</button>
-			{{/if}}
+<head>
+	<meta charset="UTF-8">
+	<link href="style.css" rel="stylesheet">
+</head>
+
+<body>
+	<div id="app">
+
+		<div id="sidebar">
+			<div id="loginbar">
+				<script>
+					function getCookie(cname) {
+						var name = cname + "=";
+						var decodedCookie = decodeURIComponent(document.cookie);
+						var ca = decodedCookie.split(';');
+						for (var i = 0; i < ca.length; i++) {
+							var c = ca[i];
+							while (c.charAt(0) == ' ') {
+								c = c.substring(1);
+							}
+							if (c.indexOf(name) == 0) {
+								return c.substring(name.length, c.length);
+							}
+						}
+						return "";
+					}
+					const logBar = document.getElementById('loginbar');
+					if (document.cookie.indexOf('username=') == -1) {
+						logBar.innerHTML = ' <label for="username"> Username: </label><input id="username" name="username" type="text" size="12"><label for="password"> Password: </label><input id="password" name="password" type="text" size="12"><button id="login"> Log In </button><button id="signUp"> Sign Up</button>';
+					}
+					else {
+						logBar.innerHTML = '<p id = "LogMessage">' + getCookie("username") + '<br /> High Score: ' + getCookie("highscore") + ' </p>';
+					}
+				</script>
+			</div>
+			<a href="/leaderboards" id="leaderboard" class="bar"> Leaderboards </a>
+			<div id="admin" class="bar"> Admin Page </div>
+			<a href="/snake" id="snakeButton" class="bar"> Play Snake </a>
 		</div>
-		<a href="/leaderboards" id="leaderboard" class="bar"> Leaderboards </a>
-		<div id="admin" class="bar"> Admin Page </div>
-        <a href ="/snake" id="snakeButton" class="bar"> Play Snake </a>
+
+		<div id="mainSpace">
+			{{{body}}}
+		</div>
 	</div>
-	
-	<div id="mainSpace"> 
-	{{{body}}}
-	</div>
-</div>	
-<script src='/snake.js'></script>
+	<script src='/snake.js'></script>
 </body>
+
 </html>

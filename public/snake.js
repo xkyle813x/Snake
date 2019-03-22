@@ -1,4 +1,6 @@
 (function() {
+
+    
 	
 function validateUser( user, password, callback ) {
 	let req = new XMLHttpRequest();
@@ -51,6 +53,8 @@ loginButton.addEventListener('click', (evt) => {
         let res = req.response;
         if(res.ok){
             console.log('Log In Success');
+            document.cookie = "username = " + userName.value;
+            document.cookie = "highscore = "+ res.score;
         }
         else{
             console.log('Log In Invalid');
@@ -70,6 +74,8 @@ signUpButton.addEventListener('click', (evt) => {
                 if(res2.ok){
                     console.log("SignUp success");
                     loginBar.innerHTML = '<p>Welcome ' + userName.value + '</p>';
+                    document.cookie = "username = " + userName.value;
+                    document.cookie = "highscore = 0";
                 }
                 else{
                     console.log('Sign up error', res2);
