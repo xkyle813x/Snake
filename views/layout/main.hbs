@@ -29,7 +29,7 @@
 					}
 					const logBar = document.getElementById('loginbar');
 					if (document.cookie.indexOf('username=') == -1) {
-						logBar.innerHTML = ' <label for="username"> Username: </label><input id="username" name="username" type="text" size="12"><label for="password"> Password: </label><input id="password" name="password" type="text" size="12"><button id="login"> Log In </button><button id="signUp"> Sign Up</button>';
+						logBar.innerHTML = ' <label for="username"> Username: </label><input id="username" name="username" type="text" size="12"><label for="password"> Password: </label><input id="password" name="password" type="text" size="12"><button id="login"> Log In </button><button id="signUp"> Sign Up</button><p id = "LogMessage"></p>';
 					}
 					else {
 						logBar.innerHTML = '<p id = "LogMessage">' + getCookie("username") + '<br /> High Score: ' + getCookie("highscore") + ' </p>';

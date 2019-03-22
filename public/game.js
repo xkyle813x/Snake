@@ -26,7 +26,7 @@ window.onload=function() {
     document.addEventListener("keydown",move);
     setInterval(game,1000/12);
 }
-score = 0
+var score = 0
 snake_x=snake_y=10;
 gridSize=tiles=20;
 pill_x=pill_y=15;
@@ -64,17 +64,22 @@ function game() {
                         let res2 = req.response;
                         if(res2.ok){
                             console.log("High Score Registered");
+                            console.log(score);
+                            document.cookie = "highscore = "+ score.toString();
+                            logBar.innerHTML = '<p id = "LogMessage">' + getCookie("username") + '<br /> High Score: ' + getCookie("highscore") + ' </p>';
+                            score = 0;
                         }
                         else{
                             console.log('High Score Error', res2);
+                            score = 0;
                         }
                     });
                 }
                 else{
                     console.log('No New High Score');
+                    score = 0;
                 }
             });
-            score = 0;
         }
     }
     trail.push({x:snake_x,y:snake_y});
@@ -85,6 +90,7 @@ function game() {
     if(pill_x==snake_x && pill_y==snake_y) {
         tail++;
         score++;
+        console.log(score);
         pill_x=Math.floor(Math.random()*tiles);
         pill_y=Math.floor(Math.random()*tiles);
     }
