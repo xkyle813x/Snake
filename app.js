@@ -38,8 +38,7 @@ app.set('views', __dirname + '/views');
 const port = process.env.PORT || 8000;
 
 app.use(cookieSession({
-	  name: 'session',
-	  secret: 'foo'
+    keys: ['secret']
 }));
     
 function generate_snake(res){
@@ -48,8 +47,21 @@ function generate_snake(res){
 }
 
 function generate_leaderboard(res){
+    let leaderboards = [];
     //first have sql statement to grab first ten high scores from databases
     //then call res.render on leaderboard.hbs, sending the rows back
+    db.run(     `SELECT username, highscore,
+                FROM users,
+                LIMIT 10,
+                ORDER BY highscore DESC`, 
+                function(err,rows){
+                    if(!err){
+                        res.type('.html');
+                        res.render('leaderboards',{
+                            leaderboards:rows
+                        });
+                    }
+                });
 }
 function generate_admin(res){
     //first have sql statement to grab all users
