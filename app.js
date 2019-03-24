@@ -65,7 +65,18 @@ function generate_leaderboard(res){
 }
 function generate_admin(res){
     //first have sql statement to grab all users
-    //then call res.render on admin.bs, sending the rows back
+    //then call res.render on admin.hbs, sending the rows back
+    db.run(     `SELECT username,
+                FROM users,
+                ORDER BY username DESC`, 
+                function(err,rows){
+                    if(!err){
+                        res.type('.html');
+                        res.render('admin',{
+                            users:rows
+                        });
+                    }
+                });
 }
 
 app.get('/', function(req,res){
