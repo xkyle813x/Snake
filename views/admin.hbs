@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<link href="style.css" rel="stylesheet">
+</head>
+
+<body>
+
+<table>
+    <tr>
+        <th> User </th>
+        <th> Delete </th>
+    </tr>
+    {{#each users}}
+    <tr> 
+        <td> {{this.user}} </td>
+        <td> <button id="deleteUser"> Delete </button> </td>
+    </tr>
+    {{each}}
+</table>
+
+</body>
+
+</html>
