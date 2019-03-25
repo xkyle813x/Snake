@@ -74,7 +74,7 @@ function generate_admin(res){
     //then call res.render on admin.hbs, sending the rows back
     db.all(     `SELECT username
                 FROM users
-                ORDER BY username DESC`, [],
+                ORDER BY username ASC`, [],
                 function(err,rows){
                     console.log(rows);
                     if(!err){
