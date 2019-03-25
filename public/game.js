@@ -26,6 +26,7 @@ window.onload=function() {
     document.addEventListener("keydown",move);
     setInterval(game,1000/12);
 }
+const scoreText = document.getElementById("scoreText");
 var score = 0
 snake_x=snake_y=10;
 gridSize=tiles=20;
@@ -80,6 +81,7 @@ function game() {
                     score = 0;
                 }
             });
+            scoreText.innerHTML = "Score = 0";
         }
     }
     trail.push({x:snake_x,y:snake_y});
@@ -91,6 +93,7 @@ function game() {
         tail++;
         score++;
         console.log(score);
+        scoreText.innerHTML = "Score = " +score.toString();
         pill_x=Math.floor(Math.random()*tiles);
         pill_y=Math.floor(Math.random()*tiles);
     }
