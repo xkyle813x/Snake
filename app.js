@@ -72,9 +72,9 @@ function generate_editUser(res){
 function generate_admin(res){
     //first have sql statement to grab all users
     //then call res.render on admin.hbs, sending the rows back
-    db.all(     `SELECT username,
-                FROM users,
-                ORDER BY username DESC`, 
+    db.all(     `SELECT username
+                FROM users
+                ORDER BY username DESC`, [],
                 function(err,rows){
                     if(!err){
                         res.type('.html');
