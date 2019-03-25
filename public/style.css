@@ -39,10 +39,15 @@ p{
 	text-align: center;
 }
 
-#admin{
+#editUser{
 	border: 10px solid black;
 	flex-grow: 2;
 	text-align: center;
+}
+
+#admin{
+	height: 725px;
+	overflow: scroll;
 }
 
 #snakeButton{
