@@ -86,6 +86,11 @@ function generate_admin(res){
                 });
 }
 
+function generate_error(res){
+    res.type('.html');
+    res.render('error');
+}
+
 app.get('/', function(req,res){
     generate_snake(res)
 });
@@ -103,7 +108,12 @@ app.get('/editUser',function(req,res){
 });
 
 app.get('/admin',function(req,res){
-	generate_admin(res)
+    if(req.session.admin){
+        generate_admin(res)
+    }
+    else{
+        generate_error(res)
+    }
 });
 
 
@@ -169,11 +179,13 @@ app.post('/newuser', jsonParser, function(req, res) {
     function(err){
         if(!err){
             req.session.auth = true;
+            req.session.admin = false; 
             req.session.user = authInfo.user;
             res.send( { ok: true } );
         }
         else{
             req.session.auth = false;
+            req.session.admin = false; 
             res.send( { ok: false } );
         }
 
@@ -192,6 +204,9 @@ app.post('/auth', jsonParser, function(req, res) {
                         req.session.user = authInfo.user;
                         if(row.admin == 1){
                             req.session.admin = true;
+                        }
+                        else{
+                            req.session.admin = false; 
                         }
                         res.send( { ok: true, score : row.highscore } );
                     }

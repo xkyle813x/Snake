@@ -36,18 +36,13 @@ function newUser(user, password, callback){
 
 
 const mainArea = document.getElementById('mainSpace');
-const leaderboardButton = document.getElementById('leaderboard');
-const adminButton = document.getElementById('admin');
-const snakeButton = document.getElementById('snakeButton');
 const loginMessage = document.getElementById('LogMessage');
-const loginBar = document.getElementById('loginbar');
+const logBar = document.getElementById('loginbar');
 if(document.getElementById('login') != null){
     const loginButton = document.getElementById('login');
     const signUpButton = document.getElementById('signUp');
     const userName = document.getElementById('username');
     const passwd = document.getElementById('password');
-    const usernameText = document.getElementById('username');
-    const passwdText = document.getElementById('password');
 
     loginButton.addEventListener('click', (evt) => {
         validateUser(userName.value, passwd.value, (req) => {

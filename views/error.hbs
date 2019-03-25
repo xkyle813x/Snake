@@ -1,0 +1,10 @@
+<p id = "errorMessage">You do not have administrative priveleges, please sign in with an administrative account to use this page</p>
+<script>
+logBar.addEventListener('change', (evt) => {
+    loginMessage = document.getElementById('LogMessage');
+    if(loginMessage.innerHTML == ''){
+        window.open("/snake", "_top");
+    }
+    
+});
+</script>
