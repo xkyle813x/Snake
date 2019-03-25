@@ -1,13 +1,3 @@
-<!DOCTYPE html>
-<html>
-
-<head>
-	<meta charset="UTF-8">
-	<link href="style.css" rel="stylesheet">
-</head>
-
-<body>
-
 <table>
     <tr>
         <th> User </th>
@@ -15,13 +5,8 @@
     </tr>
     {{#each users}}
     <tr> 
-        <td> {{this.user}} </td>
-        <td> {{this.highscore}} </td>
+        <td> {{this.username}}</td>
+        <td> {{this.highscore}}</td>
     </tr>
-    {{each}}
+    {{/each}}
 </table>
-
-</body>
-
-</html>
-    
