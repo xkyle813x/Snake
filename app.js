@@ -76,6 +76,7 @@ function generate_admin(res){
                 FROM users
                 ORDER BY username DESC`, [],
                 function(err,rows){
+                    console.log(rows);
                     if(!err){
                         res.type('.html');
                         res.render('admin',{
