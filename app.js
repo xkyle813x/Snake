@@ -64,6 +64,11 @@ function generate_leaderboard(res){
                     }
                 });
 }
+
+function generate_editUser(res){
+    res.type('.html');
+    res.render('editUser');
+}
 function generate_admin(res){
     //first have sql statement to grab all users
     //then call res.render on admin.hbs, sending the rows back
@@ -90,6 +95,10 @@ app.get('/snake',function(req,res){
 
 app.get('/leaderboard',function(req,res){
 	generate_leaderboard(res)
+});
+
+app.get('/editUser',function(req,res){
+	generate_editUser(res)
 });
 
 app.get('/admin',function(req,res){
