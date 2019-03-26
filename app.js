@@ -86,33 +86,44 @@ function generate_admin(res){
                 });
 }
 
+function generate_admin_error(res){
+    res.type('.html');
+    res.render('errorAdmin');
+}
+
 function generate_error(res){
     res.type('.html');
     res.render('error');
 }
 
 app.get('/', function(req,res){
-    generate_snake(res)
+    generate_snake(res);
 });
 
 app.get('/snake',function(req,res){
-	generate_snake(res)
+	generate_snake(res);
 });
 
 app.get('/leaderboard',function(req,res){
-	generate_leaderboard(res)
+	generate_leaderboard(res);
 });
 
 app.get('/editUser',function(req,res){
-	generate_editUser(res)
+    if(req.session.auth){
+        generate_editUser(res);
+    }
+    else{
+        generate_error(res);
+    }
+	
 });
 
 app.get('/admin',function(req,res){
     if(req.session.admin){
-        generate_admin(res)
+        generate_admin(res);
     }
     else{
-        generate_error(res)
+        generate_admin_error(res);
     }
 });
 
@@ -225,6 +236,33 @@ app.post('/auth', jsonParser, function(req, res) {
                 res.send( err );
             }
         } );
+});
+
+app.delete('/user/:id(\\d+)', function(req,res){
+    let id = parseIt(req.params.id);
+    db.run(`DELETE FROM users WHERE id = ?`, [id], function(err){
+        if(!err){
+            res.send({id:id, status:'deleted'});
+        }
+        else{
+            res.send({id:id, error:err});
+        }
+    });
+});
+
+app.post('/user/updatename', jsonParser, function(req, res){
+    const user = req.body;
+    console.log(user);
+    db.run('UPDATE users SET username = ? WHERE username = ?',
+    [user.username, req.session.user], function(err){
+        if(!err){
+            req.session.user = user.username;
+            res.send({username : user.username, status: 'updated'});
+        }
+        else{
+            res.send({username : req.session.user, error: err});
+        }
+    });
 });
 
 

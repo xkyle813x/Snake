@@ -52,7 +52,7 @@ if(document.getElementById('login') != null){
                 document.cookie = "username = " + userName.value;
                 console.log(res.score);
                 document.cookie = "highscore = "+ res.score;
-                logBar.innerHTML = '<p id = "LogMessage">' + getCookie("username") + '<br /> High Score: ' + getCookie("highscore") + ' </p>';
+                location.reload();
             }
             else{
                 console.log('Log In Invalid');
@@ -73,7 +73,7 @@ if(document.getElementById('login') != null){
                         console.log("SignUp success");
                         document.cookie = "username = " + userName.value;
                         document.cookie = "highscore = 0";
-                        logBar.innerHTML = '<p id = "LogMessage">' + getCookie("username") + '<br /> High Score: ' + getCookie("highscore") + ' </p>';
+                        location.reload();
                     }
                     else{
                         console.log('Sign up error', res2);
@@ -86,6 +86,7 @@ if(document.getElementById('login') != null){
                 loginMessage.innerHTML = "Username is Already Taken, Please Try a Different Name";
             }
         });
+        
     });
 }
 
