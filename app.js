@@ -40,6 +40,8 @@ const port = process.env.PORT || 8000;
 app.use(cookieSession({
     keys: ['secret']
 }));
+
+
     
 function generate_snake(res){
      res.type('.html');
@@ -72,7 +74,7 @@ function generate_editUser(res){
 function generate_admin(res){
     //first have sql statement to grab all users
     //then call res.render on admin.hbs, sending the rows back
-    db.all(     `SELECT username
+    db.all(     `SELECT id, username
                 FROM users
                 ORDER BY username ASC`, [],
                 function(err,rows){
