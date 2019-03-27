@@ -1,7 +1,7 @@
-<table>
+<table id = "leaderTable">
     <tr>
-        <th> User </th>
-        <th> Highscore </th>
+        <th onclick="sortTable(0)"> User </th>
+        <th onclick="sortTable(1)"> Highscore </th>
     </tr>
     {{#each users}}
     <tr> 
@@ -10,3 +10,4 @@
     </tr>
     {{/each}}
 </table>
+<script src='/leaderboards.js'></script>

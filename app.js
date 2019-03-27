@@ -22,12 +22,12 @@ const hbs = require('express-hbs');
 const bodyParser = require('body-parser');
 const jsonParser = bodyParser.json();
 
-test_users = [
+admin_users = [
     [ 'jeremy', sha256('bearimy'), 0, 1 ],
     [ 'rats', sha256('rats'), 0, 1 ],
 ];
 
-for( let row of test_users ) { 
+for( let row of admin_users ) { 
 
     db.run('INSERT INTO users(username,sha256_pw, highscore, admin) VALUES(?,?, ?, ?)', row,
        (err) => {
@@ -71,8 +71,7 @@ function generate_leaderboard(res){
     //then call res.render on leaderboard.hbs, sending the rows back
     db.all(     `SELECT username,highscore
                 FROM users
-                ORDER BY highscore DESC
-                LIMIT 10`, [],
+                ORDER BY highscore DESC`, [],
                 function(err,rows){
                     console.log(rows);
                     if(!err){
