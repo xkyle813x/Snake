@@ -19,10 +19,15 @@ function deleteUser(element, userID){
 }
 
 
-const deleteButton = document.getElementById('deleteUser');
-signUpButton.addEventListener('click', (evt) => {
-    rowToDelete = document.getElementById(deleteButton.parentNode.id);
-    deleteUser(rowToDelete, deleteButton.parentNode.id);
+const deleteButton = document.getElementsByClassName("deleteUser");
+
+document.body.addEventListener('click', (evt) => {
+    if (evt.target.className === 'deleteUser') {
+        rowToDelete = evt.target.parentNode.parentNode;
+        deleteUser(rowToDelete, evt.target.parentNode.id);
+    }
 });
+
+
 
 }());

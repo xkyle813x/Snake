@@ -35,7 +35,6 @@ function newUser(user, password, callback){
 
 
 
-const mainArea = document.getElementById('mainSpace');
 const loginMessage = document.getElementById('LogMessage');
 const logBar = document.getElementById('loginbar');
 if(document.getElementById('login') != null){
@@ -77,13 +76,13 @@ if(document.getElementById('login') != null){
                     }
                     else{
                         console.log('Sign up error', res2);
-                        loginMessage.innerHTML =" Unspecified Error, try again";
+                        loginMessage.innerHTML =" Sign Up Error, try again";
                     }
                 });
             }
             else{
                 console.log('Sign up Username taken');
-                loginMessage.innerHTML = "Username is Already Taken, Please Try a Different Name";
+                loginMessage.innerHTML = "Please Try a Different Name and Password";
             }
         });
         

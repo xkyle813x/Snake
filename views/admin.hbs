@@ -6,9 +6,9 @@
         <th> Delete </th>
     </tr>
     {{#each users}}
-    <tr id = '{{this.id}}'> 
+    <tr> 
         <td> {{this.username}} </td>
-        <td> <button id="deleteUser"> Delete </button> </td>
+        <td id = '{{this.id}}'> <button class="deleteUser"> Delete </button> </td>
     </tr>
     {{/each}}
 </table>

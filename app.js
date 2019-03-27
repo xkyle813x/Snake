@@ -22,6 +22,23 @@ const hbs = require('express-hbs');
 const bodyParser = require('body-parser');
 const jsonParser = bodyParser.json();
 
+test_users = [
+    [ 'jeremy', sha256('bearimy'), 0, 1 ],
+    [ 'rats', sha256('rats'), 0, 1 ],
+];
+
+for( let row of test_users ) { 
+
+    db.run('INSERT INTO users(username,sha256_pw, highscore, admin) VALUES(?,?, ?, ?)', row,
+       (err) => {
+           if ( err ) {
+               console.log( err );
+           } else {
+               console.log('insert', row );
+           }
+       } );
+}
+
 const app = express();
 // the static file middleware
 app.use(express.static( __dirname + '/public'));
@@ -187,6 +204,7 @@ app.post('/check', jsonParser, function(req,res){
 
 app.post('/newuser', jsonParser, function(req, res) {
     const authInfo = req.body;
+    if(authInfo.user != '' && authInfo.password != ''){
     db.run('INSERT INTO users(username, sha256_pw, highscore, admin) VALUES(?,?,?,?)',
     [authInfo.user, sha256(authInfo.password), 0, 0], 
     function(err){
@@ -203,6 +221,13 @@ app.post('/newuser', jsonParser, function(req, res) {
         }
 
     });
+    }
+    else{
+        req.session.auth = false;
+        req.session.admin = false; 
+        res.send( { ok: false } );
+    }
+    
 });
 
 app.post('/auth', jsonParser, function(req, res) {
@@ -212,7 +237,7 @@ app.post('/auth', jsonParser, function(req, res) {
         function(err, row) {
             if ( !err ) {
                 if( row ) {
-                    if( sha256(authInfo.password) == row.sha256_pw ) {
+                    if( (sha256(authInfo.password) == row.sha256_pw) ) {
                         req.session.auth = true;
                         req.session.user = authInfo.user;
                         if(row.admin == 1){
@@ -241,7 +266,7 @@ app.post('/auth', jsonParser, function(req, res) {
 });
 
 app.delete('/user/:id(\\d+)', function(req,res){
-    let id = parseIt(req.params.id);
+    let id = parseInt(req.params.id);
     db.run(`DELETE FROM users WHERE id = ?`, [id], function(err){
         if(!err){
             res.send({id:id, status:'deleted'});
@@ -262,6 +287,21 @@ app.post('/user/updatename', jsonParser, function(req, res){
             res.send({username : user.username, status: 'updated'});
         }
         else{
+            res.send({username : req.session.user, error: err});
+        }
+    });
+});
+
+app.post('/user/updatepassword', jsonParser, function(req, res){
+    const password = req.body;
+    console.log(password);
+    db.run('UPDATE users SET sha256_pw = ? WHERE username = ?',
+    [sha256(password.password), req.session.user], function(err){
+        if(!err){
+            res.send({username : req.session.user, status: 'updated'});
+        }
+        else{
+            console.log(err);
             res.send({username : req.session.user, error: err});
         }
     });
