@@ -92,6 +92,7 @@ function generate_admin(res){
     //then call res.render on admin.hbs, sending the rows back
     db.all(     `SELECT id, username
                 FROM users
+                WHERE admin = 0
                 ORDER BY username ASC`, [],
                 function(err,rows){
                     console.log(rows);
@@ -138,6 +139,7 @@ app.get('/editUser',function(req,res){
 
 app.get('/admin',function(req,res){
     if(req.session.admin){
+        console.log(req.session.admin);
         generate_admin(res);
     }
     else{
@@ -227,6 +229,15 @@ app.post('/newuser', jsonParser, function(req, res) {
         res.send( { ok: false } );
     }
     
+});
+
+app.delete('/logOut', jsonParser, function(req, res){
+    console.log(req.session);
+    req.session.auth = false;
+    req.session.admin = false; 
+    req.session.user = null;
+    res.send( { ok: true } );
+    console.log(req.session);
 });
 
 app.post('/auth', jsonParser, function(req, res) {
