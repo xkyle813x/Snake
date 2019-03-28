@@ -83,6 +83,9 @@ function game() {
                     }
                 });
             }
+            else{
+                score = 0
+            }
             scoreText.innerHTML = "Score = 0";
         }
     }
