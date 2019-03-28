@@ -14,39 +14,48 @@
 	background: black;
 	position: relative;
 	flex-grow: 0;
-	border: 10px dotted lime;
+	border: 10px solid purple;
 	width: 25%;
 	height: 730px;
 }
 p{
-	color: lime;
+	color: purple;
 }
 #scoreText{
 	color:black;
+	font-size:36pt;
+	font-family: "serif";
+	text-align: center;
 }
 
 #loginbar{
 	background: black;
-	color: lime;
+	color: purple;
 	border: 10px solid black;
 	flex-grow: 3;
 	text-align: center;
+	font-size:48pt;
+	font-family: "serif";
 }
 
 #leaderboard{
 	border: 10px solid black;
 	flex-grow: 2;
 	text-align: center;
+	font-size:24pt;
+	font-family: "serif";
 }
 
 #editUser{
 	border: 10px solid black;
 	flex-grow: 2;
 	text-align: center;
+	font-size:24pt;
+	font-family: "serif";
 }
 
 #admin{
-	height: 725px;
+	height: 750px;
 	overflow: scroll;
 }
 
@@ -54,14 +63,45 @@ p{
 	border: 10px solid black;
 	flex-grow: 2;
 	text-align: center;
+	font-size:48pt;
+	font-family: "serif";
 }
 
 .bar:hover{
-	background: black;
-	color: white;
+	background: purple;
+	color: black;
 }
 
 #mainSpace{
-	border: 10px solid black;
 	flex-grow: 1;
+	background: purple;
+}
+
+#editUserPage{
+	text-align: center;
+	font-size:24pt;
+	font-family: "serif";
+}
+
+.button{
+	background-color: black;
+	color: purple;
+	text-align: center;
+	font-size:18pt;
+	border: purple;
+}
+
+#table{
+	border: 5px solid black;
+	text-align: center;
+	font-size:24pt;
+	font-family: "serif";
+}
+
+.deleteUser{
+	background-color: black;
+	color: purple;
+	text-align: center;
+	font-size:18pt;
+	border: purple;
 }

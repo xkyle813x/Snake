@@ -1,12 +1,12 @@
-<table id = "leaderTable">
-    <tr>
-        <th onclick="sortTable(0)"> User </th>
-        <th onclick="sortTable(1)"> Highscore </th>
+<table id="table">
+    <tr id="table">
+        <th onclick="sortTable(0)" id="table"> User </th>
+        <th onclick="sortTable(1)" id="table"> Highscore </th>
     </tr>
     {{#each users}}
-    <tr> 
-        <td> {{this.username}}</td>
-        <td> {{this.highscore}}</td>
+    <tr id="table"> 
+        <td id="table"> {{this.username}}</td>
+        <td id="table"> {{this.highscore}}</td>
     </tr>
     {{/each}}
 </table>

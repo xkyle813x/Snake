@@ -1,14 +1,14 @@
 <div id='admin'>
 <script src='/admin.js'></script>
-<table>
-    <tr>
-        <th> User </th>
-        <th> Delete </th>
+<table id="table">
+    <tr id="table">
+        <th id="table"> User </th>
+        <th id="table"> Delete </th>
     </tr>
     {{#each users}}
-    <tr> 
-        <td> {{this.username}} </td>
-        <td id = '{{this.id}}'> <button class="deleteUser"> Delete </button> </td>
+    <tr id="table"> 
+        <td id="table"> {{this.username}} </td>
+        <td id = '{{this.id}}' class="button"> <button class="deleteUser"> Delete </button> </td>
     </tr>
     {{/each}}
 </table>
