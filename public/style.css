@@ -59,6 +59,11 @@ p{
 	overflow: scroll;
 }
 
+#leaderboards{
+	height: 750px;
+	overflow: scroll;
+}
+
 #snakeButton{
 	border: 10px solid black;
 	flex-grow: 2;
