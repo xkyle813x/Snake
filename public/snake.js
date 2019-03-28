@@ -32,10 +32,18 @@ function newUser(user, password, callback){
 	req.send( JSON.stringify( obj ));
 }
 
+function logOut(){
+    let req = new XMLHttpRequest();
+    req.open('DELETE', '/logout');
+    req.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
+    req.responseType = 'json';
+    req.send();
+}
 
 
 
-const loginMessage = document.getElementById('LogMessage');
+
+const loginMessage = document.getElementById('errMsg');
 const logBar = document.getElementById('loginbar');
 if(document.getElementById('login') != null){
     const loginButton = document.getElementById('login');
@@ -86,6 +94,15 @@ if(document.getElementById('login') != null){
             }
         });
         
+    });
+}
+else{
+    const logOutButton = document.getElementById('logout');
+    logOutButton.addEventListener('click', (evt) => {
+        document.cookie = 'username =; Max-Age=-99999999;';
+        document.cookie = 'highscore =; Max-Age=-99999999;';
+        logOut();
+        location.reload();
     });
 }
 

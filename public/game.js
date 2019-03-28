@@ -57,30 +57,32 @@ function game() {
         ctx.fillRect(trail[i].x*gridSize,trail[i].y*gridSize,gridSize-2,gridSize-2);
         if((trail[i].x==snake_x && trail[i].y==snake_y) && (trail[i].x != 10 && trail[i].y != 10)) {
             tail = 1;
-            checkHighScore(score,  (req) => {
-                let res = req.response;
-                if(res.ok){
-                    console.log('New High Score');
-                    updateHighScore(score,  (req) => {
-                        let res2 = req.response;
-                        if(res2.ok){
-                            console.log("High Score Registered");
-                            console.log(score);
-                            document.cookie = "highscore = "+ score.toString();
-                            logBar.innerHTML = '<p id = "LogMessage">' + getCookie("username") + '<br /> High Score: ' + getCookie("highscore") + ' </p>';
-                            score = 0;
-                        }
-                        else{
-                            console.log('High Score Error', res2);
-                            score = 0;
-                        }
-                    });
-                }
-                else{
-                    console.log('No New High Score');
-                    score = 0;
-                }
-            });
+            if(document.cookie){
+                checkHighScore(score,  (req) => {
+                    let res = req.response;
+                    if(res.ok){
+                        console.log('New High Score');
+                        updateHighScore(score,  (req) => {
+                            let res2 = req.response;
+                            if(res2.ok){
+                                console.log("High Score Registered");
+                                console.log(score);
+                                document.cookie = "highscore = "+ score.toString();
+                                logBar.innerHTML = '<p id = "LogMessage">' + getCookie("username") + '<br /> High Score: ' + getCookie("highscore") + ' </p>';
+                                score = 0;
+                            }
+                            else{
+                                console.log('High Score Error', res2);
+                                score = 0;
+                            }
+                        });
+                    }
+                    else{
+                        console.log('No New High Score');
+                        score = 0;
+                    }
+                });
+            }
             scoreText.innerHTML = "Score = 0";
         }
     }

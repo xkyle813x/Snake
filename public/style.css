@@ -3,9 +3,29 @@
 #app{
 	display: flex;
 	flex-direction: row;
-	width: 100%;
-	height: 750px;
+	width: 99%;
+	height: 750px; 
 	border: 10px solid black;
+}
+
+#centre{
+	display: block;
+}
+
+#LogMessage{
+	font-size: 25pt;
+}
+
+#errMsg{
+	font-size: 15pt;
+}
+
+#gameCanvas{
+display: block;
+margin-left: auto;
+margin-right: auto;
+width: 40%;
+border: 10px solid black;
 }
 
 #sidebar{

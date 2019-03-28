@@ -51,7 +51,7 @@ const updateUserButton = document.getElementById('updateUsername');
 const updatePasswordButton = document.getElementById('updatePassword');
 const newName = document.getElementById('newUsername');
 const newPass = document.getElementById('newPassword');
-const errMessage = document.getElementById('ErrMsg');
+const errMessage = document.getElementById('errMsg');
 
 updateUserButton.addEventListener('click', (evt) => {
     errMessage.innerHTML = '';
@@ -81,7 +81,7 @@ updatePasswordButton.addEventListener('click', (evt) => {
         newPass.value = '';
     }
     else{
-        errMessage.innerHTML ="Please Enter a password";
+        errMessage.innerHTML ="Please enter a password";
     }
 })
 }());

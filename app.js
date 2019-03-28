@@ -22,7 +22,7 @@ const hbs = require('express-hbs');
 const bodyParser = require('body-parser');
 const jsonParser = bodyParser.json();
 
-admin_users = [
+/* admin_users = [
     [ 'jeremy', sha256('bearimy'), 0, 1 ],
     [ 'rats', sha256('rats'), 0, 1 ],
 ];
@@ -37,7 +37,7 @@ for( let row of admin_users ) {
                console.log('insert', row );
            }
        } );
-}
+} */
 
 const app = express();
 // the static file middleware
