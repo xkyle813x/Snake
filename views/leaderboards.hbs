@@ -1,14 +1,14 @@
 <div id="leaderboards">
 
-<table id="table">
-    <tr id="table">
-        <th onclick="sortTable(0)" id="table"> User </th>
-        <th onclick="sortTable(1)" id="table"> Highscore </th>
+<table id = "leaderTable" class="table">
+    <tr class="table">
+        <th onclick="sortTable(0)" class="table"> User </th>
+        <th onclick="sortTable(1)" class="table"> Highscore </th>
     </tr>
     {{#each users}}
-    <tr id="table"> 
-        <td id="table"> {{this.username}}</td>
-        <td id="table"> {{this.highscore}}</td>
+    <tr class="table"> 
+        <td class="table"> {{this.username}}</td>
+        <td class="table"> {{this.highscore}}</td>
     </tr>
     {{/each}}
 </table>
