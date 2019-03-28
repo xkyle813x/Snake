@@ -52,7 +52,7 @@ function game() {
     ctx.fillStyle="black";
     ctx.fillRect(0,0,canv.width,canv.height);
  
-    ctx.fillStyle="white";
+    ctx.fillStyle="purple";
     for(var i=0;i<trail.length;i++) {
         ctx.fillRect(trail[i].x*gridSize,trail[i].y*gridSize,gridSize-2,gridSize-2);
         if((trail[i].x==snake_x && trail[i].y==snake_y) && (trail[i].x != 10 && trail[i].y != 10)) {
@@ -97,7 +97,7 @@ function game() {
         pill_x=Math.floor(Math.random()*tiles);
         pill_y=Math.floor(Math.random()*tiles);
     }
-    ctx.fillStyle="grey";
+    ctx.fillStyle="red";
     ctx.fillRect(pill_x*gridSize,pill_y*gridSize,gridSize-2,gridSize-2);
 }
 function move(evt) {
