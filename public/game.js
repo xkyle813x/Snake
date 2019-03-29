@@ -27,6 +27,7 @@ window.onload=function() {
     setInterval(game,1000/12);
 }
 const scoreText = document.getElementById("scoreText");
+const logMessage = document.getElementById("LogMessage");
 var score = 0
 snake_x=snake_y=10;
 gridSize=tiles=20;
@@ -68,7 +69,7 @@ function game() {
                                 console.log("High Score Registered");
                                 console.log(score);
                                 document.cookie = "highscore = "+ score.toString();
-                                logBar.innerHTML = '<p id = "LogMessage">' + getCookie("username") + '<br /> High Score: ' + getCookie("highscore") + ' </p>';
+                                logMessage.innerHTML = getCookie("username") + '<br /> High Score: ' + getCookie("highscore");
                                 score = 0;
                             }
                             else{

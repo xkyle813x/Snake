@@ -22,22 +22,22 @@ const hbs = require('express-hbs');
 const bodyParser = require('body-parser');
 const jsonParser = bodyParser.json();
 
-/* admin_users = [
-    [ 'jeremy', sha256('bearimy'), 0, 1 ],
-    [ 'rats', sha256('rats'), 0, 1 ],
-];
+// admin_users = [
+//     [ 'jeremy', sha256('bearimy'), 0, 1 ],
+//     [ 'rats', sha256('rats'), 0, 1 ],
+// ];
 
-for( let row of admin_users ) { 
+// for( let row of admin_users ) { 
 
-    db.run('INSERT INTO users(username,sha256_pw, highscore, admin) VALUES(?,?, ?, ?)', row,
-       (err) => {
-           if ( err ) {
-               console.log( err );
-           } else {
-               console.log('insert', row );
-           }
-       } );
-} */
+//     db.run('INSERT INTO users(username,sha256_pw, highscore, admin) VALUES(?,?, ?, ?)', row,
+//        (err) => {
+//            if ( err ) {
+//                console.log( err );
+//            } else {
+//                console.log('insert', row );
+//            }
+//        } );
+// } 
 
 const app = express();
 // the static file middleware
