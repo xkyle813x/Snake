@@ -232,12 +232,10 @@ app.post('/newuser', jsonParser, function(req, res) {
 });
 
 app.delete('/logOut', jsonParser, function(req, res){
-    console.log(req.session);
     req.session.auth = false;
     req.session.admin = false; 
     req.session.user = null;
     res.send( { ok: true } );
-    console.log(req.session);
 });
 
 app.post('/auth', jsonParser, function(req, res) {
