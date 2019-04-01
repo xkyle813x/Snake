@@ -4,8 +4,9 @@
 	display: flex;
 	flex-direction: row;
 	width: 99%;
-	height: 780px; 
+	height: 800px; 
 	border: 10px solid black;
+	background: purple;
 }
 
 #centre{
