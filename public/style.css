@@ -130,3 +130,9 @@ p{
 	font-size:18pt;
 	border: purple;
 }
+
+.error{
+	color: black;
+	text-align:center;
+	font-size: 18pt;
+}
