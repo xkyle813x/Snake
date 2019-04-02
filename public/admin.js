@@ -19,12 +19,17 @@ function deleteUser(element, userID){
 }
 
 
-const deleteButton = document.getElementsByClassName("deleteUser");
 
 document.body.addEventListener('click', (evt) => {
+    console.log(evt.target);
     if (evt.target.className === 'deleteUser') {
-        rowToDelete = evt.target.parentNode.parentNode;
+        var conf = confirm("Are you sure you want to delete this user?");
+        if(conf){
+            rowToDelete = evt.target.parentNode.parentNode;
         deleteUser(rowToDelete, evt.target.parentNode.id);
+        }
+
+        
     }
 });
 
